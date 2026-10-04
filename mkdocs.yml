@@ -1,0 +1,94 @@
+site_name: ELEC 5690 · 医学影像分析
+site_description: 医学影像人工智能课程笔记：深度学习、分类、分割、训练策略与视网膜影像。保留全部 504 页原课件及图例。
+site_url: https://zjucqr.github.io/ELEC5690/
+repo_url: https://github.com/ZJUCQR/ELEC5690
+repo_name: ZJUCQR / ELEC5690
+copyright: 课程课件 © 原作者 · 中文整理仅供课程学习 · 图示保留原始署名
+theme:
+  name: material
+  language: zh
+  font: false
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: 切换至深色模式
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: 切换至浅色模式
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - toc.follow
+plugins:
+  - search:
+      lang:
+        - en
+        - zh
+hooks:
+  - scripts/hooks.py
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - def_list
+  - footnotes
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+extra_css:
+  - assets/vendor/katex/katex.min.css
+  - assets/stylesheets/extra.css
+extra_javascript:
+  - assets/vendor/katex/katex.min.js
+  - assets/javascripts/site.js
+nav:
+  - 课程笔记:
+    - 首页: index.md
+    - 1a · Course Introduction: notes/01a-introduction.md
+    - 1b · Deep Learning Fundamentals: notes/01b-fundamentals.md
+    - 2 · Classification: notes/02-classification.md
+    - 3 · Segmentation: notes/03-segmentation.md
+    - 4 · Training & Retinal Images: notes/04-training-retina.md
+  - 课件原页:
+    - 资料库: slides/index.md
+    - Lecture 01a · 56 页: slides/generated/01a.md
+    - Lecture 01b · 76 页: slides/generated/01b.md
+    - Lecture 02 · 120 页: slides/generated/02.md
+    - Lecture 03 · 139 页: slides/generated/03.md
+    - Lecture 04 · 113 页: slides/generated/04.md
+  - 速查与资料:
+    - 术语与公式: reference/glossary.md
+    - 资料与编写说明: reference/sources.md
+validation:
+  nav:
+    omitted_files: ignore
+  links:
+    not_found: warn
+    anchors: warn

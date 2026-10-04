@@ -1,0 +1,10 @@
+.venv/
+.work/
+site/
+__pycache__/
+.DS_Store
+docs/assets/slides/
+docs/originals/
+docs/slides/generated/
+docs/assets/slide-manifest.json
+node_modules/
