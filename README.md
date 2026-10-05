@@ -4,7 +4,7 @@
 
 将五份 2026 秋季课程 PDF 整理为中文笔记，覆盖课程介绍、深度学习基础、分类、分割、训练策略与视网膜影像。保留全部 **504 页**原课件、**83 张正文例图**及原始 PDF 下载。
 
-页面组织与笔记写法参考 [T-ComputerNetworks](https://zhengliangduanfang.github.io/T-ComputerNetworks/)，视觉采用暖白、深绿色和医学影像元素。包含章节导航、页内目录、中英文搜索、本地公式排版、图片放大、原页跳转、深色模式与移动端布局。
+视觉采用暖白、深绿色和医学影像元素。包含章节导航、页内目录、中英文搜索、本地公式排版、图片放大、原页跳转、深色模式与移动端布局。
 
 ## 本地预览
 
@@ -59,7 +59,8 @@ Lecture*.pdf                 原始课件，不修改
 PLAN.md                      实施规划与验收范围
 mkdocs.yml                   站点导航、主题及插件
 docs/notes/                  五章人工整理的 Markdown
-docs/reference/              术语、公式、资料与澄清
+docs/index.md                课程首页与术语、公式速查
+docs/reference/              资料说明与旧速查入口
 docs/assets/stylesheets/     自定义视觉设计
 docs/assets/javascripts/     图片放大、课件浏览、数学排版
 docs/assets/vendor/katex/    本地数学排版资源及许可证

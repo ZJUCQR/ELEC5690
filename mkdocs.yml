@@ -76,16 +76,6 @@ nav:
     - 2 · Classification: notes/02-classification.md
     - 3 · Segmentation: notes/03-segmentation.md
     - 4 · Training & Retinal Images: notes/04-training-retina.md
-  - 课件原页:
-    - 资料库: slides/index.md
-    - Lecture 01a · 56 页: slides/generated/01a.md
-    - Lecture 01b · 76 页: slides/generated/01b.md
-    - Lecture 02 · 120 页: slides/generated/02.md
-    - Lecture 03 · 139 页: slides/generated/03.md
-    - Lecture 04 · 113 页: slides/generated/04.md
-  - 速查与资料:
-    - 术语与公式: reference/glossary.md
-    - 资料与编写说明: reference/sources.md
 validation:
   nav:
     omitted_files: ignore

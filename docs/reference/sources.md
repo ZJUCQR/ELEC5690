@@ -46,7 +46,7 @@
 - Jerry L. Prince, Jonathan M. Links, *Medical Imaging Signals and Systems*.
 - Kevin Zhou, Hayit Greenspan, Dinggang Shen, *Deep Learning for Medical Image Analysis*.
 
-页面组织与中文笔记语言参考 [ZhengliangDuanfang / T-ComputerNetworks](https://zhengliangduanfang.github.io/T-ComputerNetworks/)。本网站另行设计暖白与深绿色视觉，使用 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) 构建，并使用 [KaTeX](https://katex.org/) 排版公式。
+本网站采用暖白与深绿色视觉，使用 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) 构建，并使用 [KaTeX](https://katex.org/) 排版公式。
 
 ## 使用与维护
 
