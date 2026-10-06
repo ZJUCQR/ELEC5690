@@ -285,4 +285,4 @@ Esteva et al.（2017，p. 112–114）使用 Inception-v3。模型在 757 个细
 
 ---
 
-[原文与图示](../slides/generated/02.md) · [PDF](../originals/lecture-02.pdf) · [资料说明](../reference/sources.md)
+[原文与图示](../slides/generated/02.md) · [PDF](../originals/lecture-02.pdf)

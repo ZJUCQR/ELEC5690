@@ -273,4 +273,4 @@ $$
 
 ---
 
-[原文与图示](../slides/generated/03.md) · [PDF](../originals/lecture-03.pdf) · [资料说明](../reference/sources.md)
+[原文与图示](../slides/generated/03.md) · [PDF](../originals/lecture-03.pdf)

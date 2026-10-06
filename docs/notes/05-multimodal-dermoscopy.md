@@ -384,4 +384,4 @@ $$
 
 ---
 
-[原文与图示](../slides/generated/05.md) · [PDF](../originals/lecture-05.pdf) · [资料说明](../reference/sources.md)
+[原文与图示](../slides/generated/05.md) · [PDF](../originals/lecture-05.pdf)

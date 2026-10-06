@@ -50,7 +50,7 @@ python -m http.server 8000 --bind 127.0.0.1 --directory .work/preview
 
 仓库使用 GitHub Actions 发布，工作流在推送 `main` 或手动运行时构建、校验、上传并部署。仓库 **Settings → Pages → Source** 应为 **GitHub Actions**。
 
-若 fork 到其他仓库，修改 `mkdocs.yml` 的 `site_url`、`repo_url`、`repo_name`，以及首页/资料说明中的仓库链接和 README 中的网站地址。浏览器验证默认使用 `/ELEC5690/`；测试其他路径时设置 `SITE_TEST_URL`。
+若 fork 到其他仓库，修改 `mkdocs.yml` 的 `site_url`、`repo_url`、`repo_name`，以及 README 中的网站地址。浏览器验证默认使用 `/ELEC5690/`；测试其他路径时设置 `SITE_TEST_URL`。
 
 ## 文件组织
 
@@ -60,7 +60,7 @@ PLAN.md                      实施规划与验收范围
 mkdocs.yml                   站点导航、主题及插件
 docs/notes/                  六章人工整理的 Markdown
 docs/index.md                课程首页与术语、公式速查
-docs/reference/              资料说明与旧速查入口
+docs/slides/index.md         原 PPT 索引
 docs/assets/stylesheets/     页面样式
 docs/assets/javascripts/     图片放大、课件浏览、数学排版
 docs/assets/vendor/katex/    本地数学排版资源及许可证
@@ -80,10 +80,10 @@ scripts/browser_check.py     真实浏览器阅读路径验证
 [[slide:03:33|IoU 与 Dice]]
 ```
 
-增加或替换课件时，应同时更新 `scripts/decks.py` 中的页数、主题映射、笔记及相关来源说明。首页眼底图来自 Lecture 01a p. 6 的原图节选。
+增加或替换课件时，应同时更新 `scripts/decks.py` 中的页数、主题映射、笔记及相关图注出处。首页眼底图来自 Lecture 01a p. 6 的原图节选。
 
 ## 资料归属
 
-课程课件及其中论文、教学材料的图示归原作者。本项目保留原页引用，不对这些材料另行授予开源许可。中文笔记中的补充推导和实现说明已作标注；内容纠正与页码对应见网站的“资料与编写说明”。
+课程课件及其中论文、教学材料的图示归原作者。本项目保留原页引用，不对这些材料另行授予开源许可。中文笔记中的补充推导和实现说明已作标注。
 
 技术依赖：MkDocs / Material for MkDocs、PyMuPDF、Pillow、jieba 与 KaTeX；第三方资源遵循各自许可证。

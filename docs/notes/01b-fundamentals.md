@@ -245,4 +245,4 @@ Dropout 的概率必须明确是“丢弃率”还是“保留率”，不同资
 
 ---
 
-[原文与图示](../slides/generated/01b.md) · [PDF](../originals/lecture-01b.pdf) · [资料说明](../reference/sources.md)
+[原文与图示](../slides/generated/01b.md) · [PDF](../originals/lecture-01b.pdf)

@@ -119,7 +119,7 @@ AlexNet 是 2012 年图像分类突破的代表。它结合卷积、池化和全
 
 ## 1a.6 学习建议
 
-先明确图像类型与预测目标，再实现一个可解释的基线，检查数据、训练曲线与失败案例。推荐书目见[资料说明](../reference/sources.md)。
+先明确图像类型与预测目标，再实现一个可解释的基线，检查数据、训练曲线与失败案例。
 
 ## 1a.7 自测
 
@@ -134,4 +134,4 @@ AlexNet 是 2012 年图像分类突破的代表。它结合卷积、池化和全
 
 ---
 
-[原文与图示](../slides/generated/01a.md) · [PDF](../originals/lecture-01a.pdf) · [资料说明](../reference/sources.md)
+[原文与图示](../slides/generated/01a.md) · [PDF](../originals/lecture-01a.pdf)

@@ -12,7 +12,13 @@ title: 医学影像分析
 <p class="hero-description">从深度学习基础出发，理解医学影像的分类、分割与多模态分析。结合公式、图示和研究案例，把模型与实际问题连起来。</p>
 </div>
 
-## 主题导航
+<nav class="study-paths" aria-label="阅读入口">
+<a class="study-path" href="#topics"><strong>学习笔记 <span aria-hidden="true">↘</span></strong><small>按主题理解概念、公式与案例</small></a>
+<a class="study-path" href="slides/#browse"><strong>原页浏览 <span aria-hidden="true">↗</span></strong><small>逐页翻阅，放大查看原图</small></a>
+<a class="study-path" href="slides/#originals"><strong>原始 PPT <span aria-hidden="true">↗</span></strong><small>打开或保存完整 PDF</small></a>
+</nav>
+
+## 主题导航 {#topics}
 
 <div class="chapter-list">
 <a class="chapter-row" href="notes/01a-introduction/"><span class="chapter-number">01a</span><span><strong>Medical Imaging & AI · 医学影像入门</strong><small>成像方式、AI / ML / DL、视觉任务与卷积网络</small></span><span class="chapter-end">阅读 ↗</span></a>
@@ -169,7 +175,3 @@ $p_t$ 为真实类别的预测概率；$c$ 为声速，$t$ 为回波往返时间
 | 四序列 MRI 分割 | 对齐后的 `[B, 4, D, H, W]` | `[B, K, D, H, W]` logits，具体尺寸取决于网络 |
 
 这里仅列常见约定，实际模型可能裁剪或降采样输出。数据读取、模型、损失和评价代码中的形状要保持一致。
-
----
-
-[原始资料](slides/index.md) · [资料与编写说明](reference/sources.md)

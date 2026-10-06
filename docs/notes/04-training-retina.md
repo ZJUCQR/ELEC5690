@@ -270,4 +270,4 @@ LVEF 是连续数值，直接用 MSE 可以要求预测接近目标。进一步�
 
 ---
 
-[原文与图示](../slides/generated/04.md) · [PDF](../originals/lecture-04.pdf) · [资料说明](../reference/sources.md)
+[原文与图示](../slides/generated/04.md) · [PDF](../originals/lecture-04.pdf)

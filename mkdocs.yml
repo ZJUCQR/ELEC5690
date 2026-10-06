@@ -77,6 +77,7 @@ nav:
     - 3 · Segmentation: notes/03-segmentation.md
     - 4 · Training & Retinal Images: notes/04-training-retina.md
     - 5 · Multi-modal Data & Dermoscopy: notes/05-multimodal-dermoscopy.md
+  - 原 PPT: slides/index.md
 validation:
   nav:
     omitted_files: ignore
