@@ -69,7 +69,7 @@ def main():
     if errors:
         print('\n'.join(errors))
         raise SystemExit(1)
-    print(f'PASS: {len(pages)} HTML pages; all local links and anchors resolve; {total} slide images; 5 byte-identical PDFs.')
+    print(f'PASS: {len(pages)} HTML pages; all local links and anchors resolve; {total} slide images; {len(DECKS)} byte-identical PDFs.')
 
 if __name__ == '__main__':
     main()

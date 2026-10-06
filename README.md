@@ -2,9 +2,9 @@
 
 **网站：https://zjucqr.github.io/ELEC5690/**
 
-将五份 2026 秋季课程 PDF 整理为中文笔记，覆盖课程介绍、深度学习基础、分类、分割、训练策略与视网膜影像。保留全部 **504 页**原课件、**83 张正文例图**及原始 PDF 下载。
+将六份 2026 秋季课程 PDF 整理为中文笔记，覆盖课程介绍、深度学习基础、分类、分割、训练策略、视网膜、多模态数据、皮肤镜与超声。保留全部 **604 页**原课件、**109 张正文例图**及原始 PDF 下载。
 
-视觉采用暖白、深绿色和医学影像元素。包含章节导航、页内目录、中英文搜索、本地公式排版、图片放大、原页跳转、深色模式与移动端布局。
+包含章节导航、页内目录、中英文搜索、本地公式排版、图片放大、原页跳转、深色模式与移动端布局。
 
 ## 本地预览
 
@@ -58,10 +58,10 @@ python -m http.server 8000 --bind 127.0.0.1 --directory .work/preview
 Lecture*.pdf                 原始课件，不修改
 PLAN.md                      实施规划与验收范围
 mkdocs.yml                   站点导航、主题及插件
-docs/notes/                  五章人工整理的 Markdown
+docs/notes/                  六章人工整理的 Markdown
 docs/index.md                课程首页与术语、公式速查
 docs/reference/              资料说明与旧速查入口
-docs/assets/stylesheets/     自定义视觉设计
+docs/assets/stylesheets/     页面样式
 docs/assets/javascripts/     图片放大、课件浏览、数学排版
 docs/assets/vendor/katex/    本地数学排版资源及许可证
 scripts/decks.py             课件、页数与主题定位映射
@@ -81,6 +81,8 @@ scripts/browser_check.py     真实浏览器阅读路径验证
 ```
 
 增加或替换课件时，应同时更新 `scripts/decks.py` 中的页数、主题映射、笔记及相关来源说明。首页眼底图来自 Lecture 01a p. 6 的原图节选。
+
+Lecture 05 文件共 100 页，封面编号为 Lecture 06；站点按文件名接续第 5 章，并保留封面与 PDF 原貌。内容还包含超声成像，已纳入笔记和首页速查。
 
 ## 资料归属
 

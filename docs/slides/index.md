@@ -1,6 +1,6 @@
 # 课件资料库
 
-五份课件共 **504 页**，按 PDF 的物理页码完整保留。可以逐页浏览、点击放大，也可以下载原始 PDF。
+六份课件共 **604 页**，按 PDF 的物理页码完整保留。可以逐页浏览、点击放大，也可以下载原始 PDF。
 
 | 课件 | 内容 | 原页浏览 | 下载 |
 | --- | --- | --- | --- |
@@ -9,6 +9,9 @@
 | Lecture 02 | Basic Vision Models: Classification | [120 页](generated/02.md) | [PDF](../originals/lecture-02.pdf) |
 | Lecture 03 | Basic Vision Models: Segmentation | [139 页](generated/03.md) | [PDF](../originals/lecture-03.pdf) |
 | Lecture 04 | Training Strategies and Retinal Images | [113 页](generated/04.md) | [PDF](../originals/lecture-04.pdf) |
+| Lecture 05 | Multi-modal Data, Dermoscopy and Ultrasound | [100 页](generated/05.md) | [PDF](../originals/lecture-05.pdf) |
+
+Lecture 05 的文件名与封面编号不同，详见[资料与编写说明](../reference/sources.md)。
 
 ## 使用说明
 

@@ -1,5 +1,5 @@
 site_name: ELEC 5690 · 医学影像分析
-site_description: 医学影像人工智能课程笔记：深度学习、分类、分割、训练策略与视网膜影像。保留全部 504 页原课件及图例。
+site_description: 医学影像人工智能课程笔记：深度学习、分类、分割、训练策略、视网膜、多模态、皮肤镜与超声。保留全部 604 页原课件及图例。
 site_url: https://zjucqr.github.io/ELEC5690/
 repo_url: https://github.com/ZJUCQR/ELEC5690
 repo_name: ZJUCQR / ELEC5690
@@ -76,6 +76,7 @@ nav:
     - 2 · Classification: notes/02-classification.md
     - 3 · Segmentation: notes/03-segmentation.md
     - 4 · Training & Retinal Images: notes/04-training-retina.md
+    - 5 · Multi-modal Data & Dermoscopy: notes/05-multimodal-dermoscopy.md
 validation:
   nav:
     omitted_files: ignore

@@ -9,21 +9,21 @@ title: 医学影像分析
 # 医学影像分析
 
 <p class="english-title">Advanced Topics in Artificial Intelligence<br>for Medical Image Analysis</p>
-<p class="hero-description">从神经网络的基本原理，到分类、分割与视网膜影像。沿着课件的思路，把概念、公式和例子连起来。</p>
-<div class="course-stats"><span><strong>05</strong> 份课程讲义</span><span><strong>504</strong> 页原始课件</span><span><strong>2026</strong> 秋季学期</span></div>
+<p class="hero-description">从神经网络的基本原理，到分类、分割与多种医学影像。沿着课件的思路，把概念、公式和例子连起来。</p>
+<div class="course-stats"><span><strong>06</strong> 份课程讲义</span><span><strong>604</strong> 页原始课件</span><span><strong>2026</strong> 秋季学期</span></div>
 </div>
 
 !!! info "课程基本信息"
     - 课程名称：Advanced Topics in Artificial Intelligence for Medical Image Analysis
     - 课程代码：`ELEC 5690`，香港科技大学（HKUST）
     - 授课老师：Xiaomeng Li；助教：Xinrui Zhou
-    - 内容来源：2026 年 9 月的 Lecture 01a、01b、02、03、04，课程安排以原课件及最新教学通知为准。
+    - 内容来源：2026 年 9–10 月的 Lecture 01a、01b、02、03、04、05，课程安排以原课件及最新教学通知为准。
 
 ## 笔记基本信息
 
-本笔记以五份课程 PPT 的 PDF 版本为依据，按照“基础 → 分类 → 分割 → 训练策略与医学应用”的顺序整理。中文解释配合英文术语，公式单独排版；课件中的例子、网络结构和实验结果保留原页截图，并补充阅读说明。
+本笔记以六份课程 PPT 的 PDF 版本为依据，按照“基础 → 分类 → 分割 → 训练策略与医学应用”的顺序整理。中文解释配合英文术语，公式单独排版；课件中的例子、网络结构和实验结果保留原页截图，并补充阅读说明。
 
-正文中的 **Lecture / p.** 链接可以定位到对应原页。连续动画页和重复回顾在笔记中合并说明，全部 504 页仍保留在[课件资料库](slides/index.md)中。复习时可直接查看本页的[术语与公式速查](#quick-reference)。
+正文中的 **Lecture / p.** 链接可以定位到对应原页。连续动画页和重复回顾在笔记中合并说明，全部 604 页仍保留在[课件资料库](slides/index.md)中。复习时可直接查看本页的[术语与公式速查](#quick-reference)。
 
 ## 章节目录
 
@@ -33,6 +33,7 @@ title: 医学影像分析
 <a class="chapter-row" href="notes/02-classification/"><span class="chapter-number">02</span><span><strong>Classification · 图像分类</strong><small>卷积、经典网络、迁移学习、评价指标、DR / DME 与多类筛查</small></span><span class="chapter-end">120 PAGES ↗</span></a>
 <a class="chapter-row" href="notes/03-segmentation/"><span class="chapter-number">03</span><span><strong>Segmentation · 分割、三维与视频</strong><small>U-Net、Dice、三维卷积、H-DenseUNet、循环与视频模型</small></span><span class="chapter-end">139 PAGES ↗</span></a>
 <a class="chapter-row" href="notes/04-training-retina/"><span class="chapter-number">04</span><span><strong>Training & Retinal Images · 训练策略与视网膜影像</strong><small>预处理、增强、损失、眼底与 OCT、五组研究案例</small></span><span class="chapter-end">113 PAGES ↗</span></a>
+<a class="chapter-row" href="notes/05-multimodal-dermoscopy/"><span class="chapter-number">05</span><span><strong>Multi-modal Data & Dermoscopy · 多模态、皮肤镜与超声</strong><small>融合策略、胸片与报告、皮损分析、Focal Loss、旋转等变与超声测深</small></span><span class="chapter-end">100 PAGES ↗</span></a>
 </div>
 
 ## 建议阅读顺序
@@ -40,7 +41,8 @@ title: 医学影像分析
 1. **第一次学习**：先看 1a 的任务和数据，再用 1b 的回归例子理解“网络—损失—优化”。
 2. **实现分类模型**：阅读第 2 章。先明确数据划分和评价指标，再选择网络。
 3. **实现分割模型**：阅读第 3 章。重点核对输入输出尺寸、跳跃连接和 Dice / IoU。
-4. **阅读医学研究**：结合第 4 章的成像知识，按“问题—输入输出—方法—证据”的顺序看案例。
+4. **阅读医学研究**：结合第 4、5 章的成像知识，按“问题—输入输出—方法—证据”的顺序看案例。
+5. **比较多模态与多任务方法**：阅读第 5 章，沿数据流判断融合位置，再用皮肤镜消融实验理解任务和损失之间的关系。
 
 !!! tip "复习时关注什么？"
     能说明模型的输入和输出，能解释损失为什么这样定义，能读懂原图中的数据流，并知道指标没有反映什么。每章末尾的自测可以用来检查这些问题。
@@ -62,6 +64,8 @@ title: 医学影像分析
 | Spacing | 像素 / 体素间距 | 数组坐标与物理尺度的联系 | [4](notes/04-training-retina.md) |
 | ROI | 感兴趣区域 | Region of interest | [3](notes/03-segmentation.md) |
 | Data leakage | 数据泄漏 | 评价数据的信息进入训练或选参 | [2](notes/02-classification.md) |
+| Multimodal learning | 多模态学习 | 联合不同输入来源，例如 MRI 序列或图像与报告 | [5](notes/05-multimodal-dermoscopy.md) |
+| Multi-task learning | 多任务学习 | 联合多个输出目标，例如分类、检测与分割 | [5](notes/05-multimodal-dermoscopy.md) |
 
 ### 训练与网络
 
@@ -82,6 +86,11 @@ title: 医学影像分析
 | Transposed convolution | 转置卷积 | 可学习的尺寸扩张操作，不是数学逆卷积 |
 | Self-supervised learning | 自监督学习 | 从数据本身构造训练目标 |
 | MAE | 掩码自编码器 | Masked autoencoder，通过重建遮挡部分学习 |
+| Early / Joint / Late fusion | 早期 / 联合 / 后期融合 | 分别在输入、可联合训练的特征、预测结果处合并 |
+| FPN / RPN | 特征金字塔 / 区域建议网络 | 分别组织多尺度特征、产生候选区域 |
+| Focal loss | 焦点损失 | 用难易调制因子降低容易样本的相对贡献 |
+| Equivariance | 等变性 | 输入变换后，输出按对应方式变换 |
+| Deep supervision | 深监督 | 中间输出也参与损失计算 |
 
 ### 评价指标
 
@@ -97,6 +106,8 @@ title: 医学影像分析
 | Youden index | $\mathrm{Sensitivity}+\mathrm{Specificity}-1$ | ROC 操作点的一种选择准则 |
 
 ROC 是 TPR 对 FPR 的曲线；AUC 是其曲线下面积。分割的 Dice 与二分类 F1 形式相同，但实际评价还涉及图像、类别和数据集层面的归约方式。
+
+第 5 章结果表中的 AP 为 Average Precision，用于概括 precision–recall 表现；JA 为 Jaccard / IoU，DI 为 Dice。AP 不等于 Accuracy，分类指标与像素级分割指标应分别解读。
 
 ### 常用公式
 
@@ -127,12 +138,20 @@ $$
 
 $W$ 为输入尺寸，$P$ 为 padding，$D$ 为 dilation，$K$ 为核大小，$S$ 为 stride，$O$ 为 output padding。
 
-### 医学影像与眼科
+Focal loss（不含类别权重项）与超声测深：
+
+$$
+L_{\mathrm{FL}}=-(1-p_t)^\gamma\log p_t,\qquad d=\frac{ct}{2}.
+$$
+
+$p_t$ 为真实类别的预测概率；$c$ 为声速，$t$ 为回波往返时间。融合、等变性与计算例子见[第 5 章](notes/05-multimodal-dermoscopy.md)。
+
+### 医学影像与相关疾病
 
 | 缩写 / 英文 | 中文 | 出现位置 |
 | --- | --- | --- |
 | CT | 计算机断层成像 | [1a](notes/01a-introduction.md)、[3](notes/03-segmentation.md) |
-| MRI | 磁共振成像 | [1a](notes/01a-introduction.md)、[3](notes/03-segmentation.md) |
+| MRI | 磁共振成像 | [1a](notes/01a-introduction.md)、[3](notes/03-segmentation.md)、[5](notes/05-multimodal-dermoscopy.md) |
 | PET | 正电子发射断层成像 | [3](notes/03-segmentation.md) |
 | Fundus photography | 眼底照相 | [2](notes/02-classification.md)、[4](notes/04-training-retina.md) |
 | OCT | 光学相干断层成像 | [4](notes/04-training-retina.md) |
@@ -144,6 +163,12 @@ $W$ 为输入尺寸，$P$ 为 padding，$D$ 为 dilation，$K$ 为核大小，$S
 | DME | 糖尿病黄斑水肿 | [2](notes/02-classification.md) |
 | AMD | 年龄相关性黄斑变性 | [4](notes/04-training-retina.md) |
 | IVD | 椎间盘 | [3](notes/03-segmentation.md) |
+| FLAIR | 液体衰减反转恢复序列 | [5](notes/05-multimodal-dermoscopy.md) |
+| Dermoscopy | 皮肤镜 | [5](notes/05-multimodal-dermoscopy.md) |
+| Melanoma | 黑色素瘤 | [5](notes/05-multimodal-dermoscopy.md) |
+| BCC | 基底细胞癌 | [5](notes/05-multimodal-dermoscopy.md) |
+| Ultrasound / US | 超声 | [5](notes/05-multimodal-dermoscopy.md) |
+| TGC | 时间增益补偿 | [5](notes/05-multimodal-dermoscopy.md) |
 
 ### 模型选用时的输入输出
 
@@ -154,6 +179,7 @@ $W$ 为输入尺寸，$P$ 为 padding，$D$ 为 dilation，$K$ 为核大小，$S
 | 三维互斥分割 | `[B, C, D, H, W]` | `[B, K, D, H, W]` logits |
 | 标量回归 | 取决于输入模态 | `[B, 1]` |
 | 3D 卷积视频模型 | `[B, C, T, H, W]` | 视频级或逐时间步输出 |
+| 四序列 MRI 分割 | 对齐后的 `[B, 4, D, H, W]` | `[B, K, D, H, W]` logits，具体尺寸取决于网络 |
 
 这里仅列常见约定，实际模型可能裁剪或降采样输出。数据读取、模型、损失和评价代码中的形状要保持一致。
 
@@ -164,6 +190,7 @@ $W$ 为输入尺寸，$P$ 为 padding，$D$ 为 dilation，$K$ 为核大小，$S
 - [x] Lecture 02：分类、评价与医学案例
 - [x] Lecture 03：分割、三维与视频
 - [x] Lecture 04：训练策略与视网膜研究
+- [x] Lecture 05：多模态融合、皮肤镜研究与超声原理
 - [x] 全部原页、PDF 下载、[术语与公式速查](#quick-reference)
 
 !!! note "资料说明"
