@@ -56,9 +56,10 @@ html { scroll-behavior: smooth; }
 .reading-meta { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: space-between; color: var(--muted); font: .58rem/1.6 var(--md-code-font); letter-spacing: .03em; border-bottom: 1px solid var(--line); padding: .5rem 0 .9rem; margin-bottom: 1.4rem; }
 .md-typeset .admonition, .md-typeset details { font-size: .76rem; border: 1px solid var(--line); background: var(--paper); border-radius: 4px; box-shadow: none; }
 .md-typeset .admonition-title, .md-typeset summary { padding-top: .55rem; padding-bottom: .55rem; }
-.md-typeset .admonition.info, .md-typeset .admonition.note { border-color: #9eb9ac; }
-.md-typeset .info > .admonition-title, .md-typeset .note > .admonition-title { background: #59907a12; }
-.md-typeset .info > .admonition-title::before, .md-typeset .note > .admonition-title::before { background-color: #327d69; }
+.md-typeset .admonition.info, .md-typeset .admonition.note, .md-typeset details.info, .md-typeset details.note { border-color: #9eb9ac; }
+.md-typeset .info > .admonition-title, .md-typeset .note > .admonition-title, .md-typeset .info > summary, .md-typeset .note > summary { background: #59907a12; }
+.md-typeset .info > .admonition-title::before, .md-typeset .note > .admonition-title::before, .md-typeset .info > summary::before, .md-typeset .note > summary::before { background-color: #327d69; }
+.md-typeset .info > summary::after, .md-typeset .note > summary::after { color: #327d69; }
 .md-typeset .admonition.definition { border-left: 3px solid #597e55; }
 .md-typeset .definition > .admonition-title { background: #74985e13; }
 .md-typeset .definition > .admonition-title::before { background-color: #597e55; }
@@ -85,13 +86,13 @@ html { scroll-behavior: smooth; }
 .course-hero { position: relative; margin: .2rem 0 1.8rem; padding: 1.8rem 1.5rem 1.25rem; background: var(--tint); border: 1px solid var(--line); border-radius: 5px; overflow: hidden; }
 .course-hero::after { content: "+"; position: absolute; right: 1.25rem; top: .6rem; color: #80a38b; font: 1.5rem var(--md-code-font); }
 .course-hero .eyebrow { color: var(--muted); font: .58rem/1.6 var(--md-code-font); letter-spacing: .1em; margin: 0 0 1rem; }
-.course-hero h1 { font-size: 2.35rem; margin-bottom: .5rem; }
-.course-hero .english-title { font: .76rem/1.7 var(--md-text-font); color: var(--muted); max-width: 25rem; margin: 0; }
+.course-hero h1 { font-size: 1.75rem; margin-bottom: .7rem; }
+.course-hero .course-meta { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .7rem; color: var(--muted); margin: 0; }
 .course-hero .hero-description { margin: .9rem 0 1.25rem; max-width: 29rem; font-size: .8rem; }
 .hero-visual { position: absolute; top: 3.4rem; right: 1.5rem; display: block; width: 8.5rem; color: var(--muted) !important; }
 .hero-visual img { display: block; width: 100%; height: auto; border-radius: 50%; border: 5px solid #a6bfa330; }
 .hero-visual span { display: block; text-align: center; margin-top: .45rem; font: .47rem/1.6 var(--md-code-font); letter-spacing: .045em; }
-.course-hero .english-title, .course-hero .hero-description { max-width: calc(100% - 10rem); }
+.course-hero h1, .course-hero .course-meta, .course-hero .hero-description { max-width: calc(100% - 10rem); }
 .study-paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem; margin: 0 0 1.8rem; }
 .study-path { display: block; padding: .85rem .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 5px; color: var(--ink) !important; transition: background .15s, border-color .15s; }
 .study-path:hover { background: var(--tint); border-color: var(--muted); }
@@ -137,9 +138,9 @@ button:focus-visible, a:focus-visible, select:focus-visible { outline: 2px solid
   .md-typeset { font-size: .77rem; }
   .md-typeset h1 { font-size: 1.55rem; }
   .course-hero { padding: 1.3rem 1rem 1rem; }
-  .course-hero h1 { font-size: 1.85rem; }
+  .course-hero h1 { font-size: 1.45rem; }
   .hero-visual { display: none; }
-  .course-hero .english-title, .course-hero .hero-description { max-width: 100%; }
+  .course-hero h1, .course-hero .course-meta, .course-hero .hero-description { max-width: 100%; }
   .study-paths { grid-template-columns: 1fr; gap: .5rem; }
   .study-path { padding: .7rem .85rem; }
   .chapter-row { grid-template-columns: 2rem 1fr; gap: .4rem; }

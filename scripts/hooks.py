@@ -26,5 +26,5 @@ def on_page_markdown(markdown, page, config, files):
     if page.file.src_uri.startswith('notes/'):
         words = len(re.findall(r'[\u4e00-\u9fff]|\b[a-zA-Z]+\b', markdown))
         minutes = max(1, round(words / 300))
-        markdown = re.sub(r'(^# .+\n)', rf'\1\n<div class="reading-meta">医学影像分析 <span>约 {minutes} 分钟阅读</span></div>\n', markdown, count=1)
+        markdown = re.sub(r'(^# .+\n)', rf'\1\n<div class="reading-meta">ELEC 5690 <span>约 {minutes} 分钟阅读</span></div>\n', markdown, count=1)
     return markdown

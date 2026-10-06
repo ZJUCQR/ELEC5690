@@ -1,4 +1,4 @@
-# 医学影像分析
+# ELEC 5690 · Advanced Topics in Artificial Intelligence for Medical Image Analysis
 
 **网站：https://zjucqr.github.io/ELEC5690/**
 
@@ -59,7 +59,7 @@ Lecture*.pdf                 原始课件，不修改
 PLAN.md                      实施规划与验收范围
 mkdocs.yml                   站点导航、主题及插件
 docs/notes/                  六章人工整理的 Markdown
-docs/index.md                课程首页与术语、公式速查
+docs/index.md                课程首页与术语、指标速查
 docs/slides/index.md         原 PPT 索引
 docs/assets/stylesheets/     页面样式
 docs/assets/javascripts/     图片放大、课件浏览、数学排版
