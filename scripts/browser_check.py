@@ -20,7 +20,7 @@ def run():
         page.on('response', lambda response: errors.append(f'HTTP {response.status}: {response.url}') if response.status >= 400 and response.url.startswith(BASE) else None)
         page.goto(BASE)
         expect(page.locator('.chapter-row')).to_have_count(len(DECKS))
-        expect(page.locator('.md-tabs__link')).to_have_text(['课程笔记'])
+        expect(page.locator('.md-tabs__link')).to_have_text(['学习笔记'])
         page.screenshot(path=str(OUT / 'home-desktop.png'), full_page=True)
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), 'Desktop overflow'
 

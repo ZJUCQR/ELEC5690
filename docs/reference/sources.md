@@ -2,7 +2,7 @@
 
 ## 原始课件
 
-本网站整理以下六份 PDF，共 604 页，原文件保留在仓库根目录。站点下载文件仅使用较短的文件名，内容与原文件一致。
+内容整理自香港科技大学 ELEC 5690（2026 秋季），授课教师为 Xiaomeng Li。原始资料列于下表，下载文件与原文件内容一致。
 
 | 原始文件 | 页数 | 课件封面日期 |
 | --- | ---: | --- |
@@ -20,8 +20,8 @@
 ## 笔记怎样对应课件？
 
 - 每章对应一份 PDF，页码均为 PDF 从 1 开始的物理页码。
-- 核心概念、例子、网络图和研究案例写入正文，截图下方可跳转原页。
-- 连续动画步骤、重复回顾、行政信息与原有图示均完整保留在[课件资料库](../slides/index.md)。
+- 核心概念、例子、网络图和研究案例写入正文，图注与章末链接可查阅原文。
+- 连续动画步骤、重复回顾、行政信息与原有图示均完整保留在[原始资料](../slides/index.md)。
 - 正文中的补充公式、算例、实现建议和 PyTorch 对照代码属于学习整理，未假称为课件原文。
 - 论文结果按课件中的研究设置解释，不把特定实验的表现泛化为所有人群、设备或任务的结论。
 
@@ -55,6 +55,25 @@
 - Kevin Zhou, Hayit Greenspan, Dinggang Shen, *Deep Learning for Medical Image Analysis*.
 
 本网站使用 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) 构建，并使用 [KaTeX](https://katex.org/) 排版公式。
+
+??? info "课程安排存档（2026 秋季）"
+
+    以下按 Lecture 01a p. 45–48 整理，时间为课件中的安排或暂定日期。
+
+    | 项目 | 比例 | 课件要求 |
+    | --- | ---: | --- |
+    | Programming Assignment | 20% | 分类、分割两个编程任务，提交定量和定性结果；暂定 9 月 20 日至 10 月 16 日 |
+    | Paper Reading & Sharing | 20% | 10 分钟讲解 + 5 分钟问答；计划从 9 月 22 日开始 |
+    | Midterm Exam | 30% | 深度学习与医学影像基础；闭卷，可带一张 A4 笔记 |
+    | Final Project & Presentation | 25% | 1–2 人小组；调研、基线、改进、报告及展示；暂定 12 月第 2 周 |
+    | Class Attendance | 5% | 课堂出勤 |
+
+    课件列出的上课时间为周二 09:00–11:50，地点 Rm 2610（Lift 31–32）。迟交政策为共 3 天免费迟交额度，耗尽后每天扣 25%；实际执行以课程最新通知为准。
+
+    可选教材包括 [Deep Learning](https://www.deeplearningbook.org/)、*Medical Imaging Signals and Systems*、*Deep Learning for Medical Image Analysis*。完整书目见原课件 p. 46。
+
+    !!! note "课程强调的学习方式"
+        理解模型如何从头实现、如何训练和调试，能把方法用于真实医学任务。课件鼓励讨论思路，同时要求提交自己的工作、注明合作者，并遵守课程的合作政策（p. 53）。
 
 ## 使用与维护
 

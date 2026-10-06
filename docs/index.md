@@ -3,37 +3,24 @@ title: 医学影像分析
 ---
 
 <div class="course-hero" markdown>
-<p class="eyebrow">ELEC 5690 / COURSE NOTES / FALL 2026</p>
-<a class="hero-visual" href="slides/generated/01a/#page=6" aria-label="查看首页眼底图像的原课件第 6 页"><img src="assets/retina.webp" width="299" height="299" alt="原课件中的眼底照片，显示视盘与视网膜血管"><span>FUNDUS / LECTURE 01a · 06 ↗</span></a>
+<p class="eyebrow">MEDICAL IMAGE ANALYSIS</p>
+<a class="hero-visual" href="slides/generated/01a/#page=6" aria-label="查看眼底影像原图"><img src="assets/retina.webp" width="299" height="299" alt="眼底照片，显示视盘与视网膜血管"><span>FUNDUS / RETINAL IMAGING ↗</span></a>
 
 # 医学影像分析
 
-<p class="english-title">Advanced Topics in Artificial Intelligence<br>for Medical Image Analysis</p>
-<p class="hero-description">从神经网络的基本原理，到分类、分割与多种医学影像。沿着课件的思路，把概念、公式和例子连起来。</p>
-<div class="course-stats"><span><strong>06</strong> 份课程讲义</span><span><strong>604</strong> 页原始课件</span><span><strong>2026</strong> 秋季学期</span></div>
+<p class="english-title">AI for Medical Image Analysis</p>
+<p class="hero-description">从深度学习基础出发，理解医学影像的分类、分割与多模态分析。结合公式、图示和研究案例，把模型与实际问题连起来。</p>
 </div>
 
-!!! info "课程基本信息"
-    - 课程名称：Advanced Topics in Artificial Intelligence for Medical Image Analysis
-    - 课程代码：`ELEC 5690`，香港科技大学（HKUST）
-    - 授课老师：Xiaomeng Li；助教：Xinrui Zhou
-    - 内容来源：2026 年 9–10 月的 Lecture 01a、01b、02、03、04、05，课程安排以原课件及最新教学通知为准。
-
-## 笔记基本信息
-
-本笔记以六份课程 PPT 的 PDF 版本为依据，按照“基础 → 分类 → 分割 → 训练策略与医学应用”的顺序整理。中文解释配合英文术语，公式单独排版；课件中的例子、网络结构和实验结果保留原页截图，并补充阅读说明。
-
-正文中的 **Lecture / p.** 链接可以定位到对应原页。连续动画页和重复回顾在笔记中合并说明，全部 604 页仍保留在[课件资料库](slides/index.md)中。复习时可直接查看本页的[术语与公式速查](#quick-reference)。
-
-## 章节目录
+## 主题导航
 
 <div class="chapter-list">
-<a class="chapter-row" href="notes/01a-introduction/"><span class="chapter-number">01a</span><span><strong>Course Introduction · 课程介绍</strong><small>医学影像、AI / ML / DL、卷积网络直觉、课程安排与考核</small></span><span class="chapter-end">56 PAGES ↗</span></a>
-<a class="chapter-row" href="notes/01b-fundamentals/"><span class="chapter-number">01b</span><span><strong>Deep Learning Fundamentals · 深度学习基础</strong><small>回归例子、损失函数、反向传播、优化与泛化</small></span><span class="chapter-end">76 PAGES ↗</span></a>
-<a class="chapter-row" href="notes/02-classification/"><span class="chapter-number">02</span><span><strong>Classification · 图像分类</strong><small>卷积、经典网络、迁移学习、评价指标、DR / DME 与多类筛查</small></span><span class="chapter-end">120 PAGES ↗</span></a>
-<a class="chapter-row" href="notes/03-segmentation/"><span class="chapter-number">03</span><span><strong>Segmentation · 分割、三维与视频</strong><small>U-Net、Dice、三维卷积、H-DenseUNet、循环与视频模型</small></span><span class="chapter-end">139 PAGES ↗</span></a>
-<a class="chapter-row" href="notes/04-training-retina/"><span class="chapter-number">04</span><span><strong>Training & Retinal Images · 训练策略与视网膜影像</strong><small>预处理、增强、损失、眼底与 OCT、五组研究案例</small></span><span class="chapter-end">113 PAGES ↗</span></a>
-<a class="chapter-row" href="notes/05-multimodal-dermoscopy/"><span class="chapter-number">05</span><span><strong>Multi-modal Data & Dermoscopy · 多模态、皮肤镜与超声</strong><small>融合策略、胸片与报告、皮损分析、Focal Loss、旋转等变与超声测深</small></span><span class="chapter-end">100 PAGES ↗</span></a>
+<a class="chapter-row" href="notes/01a-introduction/"><span class="chapter-number">01a</span><span><strong>Medical Imaging & AI · 医学影像入门</strong><small>成像方式、AI / ML / DL、视觉任务与卷积网络</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="notes/01b-fundamentals/"><span class="chapter-number">01b</span><span><strong>Deep Learning Fundamentals · 深度学习基础</strong><small>回归、损失函数、反向传播、优化与泛化</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="notes/02-classification/"><span class="chapter-number">02</span><span><strong>Classification · 图像分类</strong><small>经典网络、迁移学习、评价指标与疾病筛查</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="notes/03-segmentation/"><span class="chapter-number">03</span><span><strong>Segmentation · 分割、三维与视频</strong><small>U-Net、Dice、三维卷积与视频建模</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="notes/04-training-retina/"><span class="chapter-number">04</span><span><strong>Training & Retinal Images · 训练策略与视网膜影像</strong><small>预处理、增强、眼底与 OCT、视网膜研究</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="notes/05-multimodal-dermoscopy/"><span class="chapter-number">05</span><span><strong>Multi-modal Data & Dermoscopy · 多模态、皮肤镜与超声</strong><small>融合、皮损分析、旋转等变与超声成像</small></span><span class="chapter-end">阅读 ↗</span></a>
 </div>
 
 ## 建议阅读顺序
@@ -49,7 +36,7 @@ title: 医学影像分析
 
 ## 术语与公式速查 {#quick-reference}
 
-按任务与方法归类。完整解释和课件示例见对应章节。
+按任务与方法归类。完整解释与案例见对应章节。
 
 ### 任务与数据
 
@@ -183,15 +170,6 @@ $p_t$ 为真实类别的预测概率；$c$ 为声速，$t$ 为回波往返时间
 
 这里仅列常见约定，实际模型可能裁剪或降采样输出。数据读取、模型、损失和评价代码中的形状要保持一致。
 
-## 编写进度
+---
 
-- [x] Lecture 01a：课程介绍与 CNN 入门
-- [x] Lecture 01b：基础概念、公式与训练方法
-- [x] Lecture 02：分类、评价与医学案例
-- [x] Lecture 03：分割、三维与视频
-- [x] Lecture 04：训练策略与视网膜研究
-- [x] Lecture 05：多模态融合、皮肤镜研究与超声原理
-- [x] 全部原页、PDF 下载、[术语与公式速查](#quick-reference)
-
-!!! note "资料说明"
-    这是一份学习整理，不是课程官方讲义。正文中另行推导的算例和代码会标注为补充；课件原图保留其引用。详见[资料与编写说明](reference/sources.md)。
+[原始资料](slides/index.md) · [资料与编写说明](reference/sources.md)

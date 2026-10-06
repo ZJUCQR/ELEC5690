@@ -1,9 +1,9 @@
-site_name: ELEC 5690 · 医学影像分析
-site_description: 医学影像人工智能课程笔记：深度学习、分类、分割、训练策略、视网膜、多模态、皮肤镜与超声。保留全部 604 页原课件及图例。
+site_name: 医学影像分析
+site_description: 从深度学习基础到医学影像分类、分割、多模态、视网膜、皮肤镜与超声，结合公式、图示和研究案例理解方法。
 site_url: https://zjucqr.github.io/ELEC5690/
 repo_url: https://github.com/ZJUCQR/ELEC5690
 repo_name: ZJUCQR / ELEC5690
-copyright: 课程课件 © 原作者 · 中文整理仅供课程学习 · 图示保留原始署名
+copyright: 图示与原始资料 © 原作者 · 仅供学习交流
 theme:
   name: material
   language: zh
@@ -69,9 +69,9 @@ extra_javascript:
   - assets/vendor/katex/katex.min.js
   - assets/javascripts/site.js
 nav:
-  - 课程笔记:
+  - 学习笔记:
     - 首页: index.md
-    - 1a · Course Introduction: notes/01a-introduction.md
+    - 1a · Medical Imaging & AI: notes/01a-introduction.md
     - 1b · Deep Learning Fundamentals: notes/01b-fundamentals.md
     - 2 · Classification: notes/02-classification.md
     - 3 · Segmentation: notes/03-segmentation.md
