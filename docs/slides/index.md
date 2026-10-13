@@ -14,6 +14,7 @@
 | 03 | [分割、三维与视频 · Segmentation](generated/03.md) |
 | 04 | [训练策略与视网膜影像 · Training & Retinal Images](generated/04.md) |
 | 05 | [多模态、皮肤镜与超声 · Multi-modal Data & Dermoscopy](generated/05.md) |
+| 06 | [超声与计算病理 · Ultrasound and Pathology](generated/06.md) |
 
 ## 原始 PPT {#originals}
 
@@ -27,5 +28,6 @@
 | 03 | 分割、三维与视频 | [打开 PDF](../originals/lecture-03.pdf) |
 | 04 | 训练策略与视网膜影像 | [打开 PDF](../originals/lecture-04.pdf) |
 | 05 | 多模态、皮肤镜与超声 | [打开 PDF](../originals/lecture-05.pdf) |
+| 06 | 超声与计算病理 | [打开 PDF](../originals/lecture-06.pdf) |
 
 Lecture 05 按文件名编号，原 PDF 封面标注为 Lecture 06。

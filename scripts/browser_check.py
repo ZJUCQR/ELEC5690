@@ -25,12 +25,12 @@ def run():
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), 'Desktop overflow'
 
         for slug in [deck['note'] for deck in DECKS]:
-            page.goto(BASE + 'notes/' + slug + '/')
+            page.goto(BASE + 'lectures/' + slug + '/')
             expect(page.locator('h1')).to_be_visible()
             assert page.locator('.katex-error').count() == 0, f'Math error on {slug}'
             assert page.locator('.slide-figure').count() >= 7
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), slug + ' overflow'
-        page.goto(BASE + 'notes/02-classification/')
+        page.goto(BASE + 'lectures/02-classification/')
         assert page.locator('.katex').count() > 20
         first = page.locator('.slide-figure a[data-zoom]').first
         first.click()
@@ -55,7 +55,11 @@ def run():
         search.fill('')
         expect(page.locator('.md-search-result__item')).to_have_count(0)
         search.fill('皮肤镜')
-        expect(page.locator('.md-search-result__list a[href*="notes/05-multimodal-dermoscopy/"]').first).to_be_visible(timeout=15000)
+        expect(page.locator('.md-search-result__list a[href*="lectures/05-multimodal-dermoscopy/"]').first).to_be_visible(timeout=15000)
+        search.fill('')
+        expect(page.locator('.md-search-result__item')).to_have_count(0)
+        search.fill('腺体')
+        expect(page.locator('.md-search-result__list a[href*="lectures/06-ultrasound-pathology/"]').first).to_be_visible(timeout=15000)
         page.keyboard.press('Escape')
 
         page.goto(BASE + 'slides/generated/03/#page=33')
@@ -76,7 +80,7 @@ def run():
         expect(page.locator('[data-page]')).to_have_value('30')
         page.screenshot(path=str(OUT / 'slide-viewer.png'), full_page=False)
 
-        page.goto(BASE + 'notes/05-multimodal-dermoscopy/')
+        page.goto(BASE + 'lectures/05-multimodal-dermoscopy/')
         expect(page.locator('.slide-figure')).to_have_count(26)
         expect(page.locator('.katex').first).to_be_attached()
         assert page.locator('.arithmatex').evaluate_all('els => els.every(el => el.querySelector(".katex"))')
@@ -90,6 +94,27 @@ def run():
         expect(page.locator('[data-pdf-page]')).to_have_attribute('href', BASE + 'originals/lecture-05.pdf#page=100')
 
         page.goto(BASE)
+        page.locator('.chapter-row[href="lectures/06-ultrasound-pathology/"]').click()
+        expect(page.locator('h1')).to_contain_text('Ultrasound & Pathology')
+        expect(page.locator('.katex').first).to_be_attached()
+        assert page.locator('.arithmatex').evaluate_all('els => els.every(el => el.querySelector(".katex"))')
+        assert page.locator('.katex-error').count() == 0
+        for heading in ['EchoPrime', 'Attention MIL', 'MSSG', 'TITAN', 'QoQ-Med']:
+            expect(page.locator('h2', has_text=heading)).to_have_count(1)
+        page.screenshot(path=str(OUT / 'lecture06-desktop.png'), full_page=False)
+        page.locator('.slide-figure figcaption a').first.click()
+        expect(page.locator('[data-page]')).to_have_value('5')
+        expect(page.locator('[data-viewer-image] img')).to_have_attribute('src', BASE + 'assets/slides/06/005.webp')
+        page.locator('[data-page]').select_option('110')
+        expect(page.locator('[data-next]')).to_be_disabled()
+        expect(page.locator('[data-pdf-page]')).to_have_attribute('href', BASE + 'originals/lecture-06.pdf#page=110')
+        page.goto(BASE + 'notes/05-multimodal-dermoscopy/#58-ultrasound')
+        expect(page).to_have_url(BASE + 'lectures/05-multimodal-dermoscopy/#58-ultrasound')
+        page.goto(BASE + 'slides/')
+        expect(page.locator('.md-content a[href="generated/06/"]')).to_be_visible()
+        expect(page.locator('.md-content a[href="../originals/lecture-06.pdf"]')).to_have_count(1)
+
+        page.goto(BASE)
         page.locator('label[for="__palette_1"]').click()
         expect(page.locator('body')).to_have_attribute('data-md-color-scheme', 'slate')
         page.screenshot(path=str(OUT / 'home-dark.png'), full_page=False)
@@ -98,7 +123,7 @@ def run():
         mobile = browser.new_context(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True, device_scale_factor=1)
         phone = mobile.new_page()
         phone.on('pageerror', lambda error: errors.append('mobile: ' + str(error)))
-        for path in ['', *[f'notes/{deck["note"]}/' for deck in DECKS], 'slides/generated/04/#page=108', 'slides/generated/05/#page=94']:
+        for path in ['', 'slides/', *[f'lectures/{deck["note"]}/' for deck in DECKS], 'slides/generated/04/#page=108', 'slides/generated/05/#page=94', 'slides/generated/06/#page=110']:
             phone.goto(BASE + path)
             assert phone.evaluate('document.documentElement.scrollWidth <= innerWidth'), 'Mobile overflow: ' + path
             if not path:
@@ -106,11 +131,13 @@ def run():
         phone.goto(BASE)
         phone.locator('.md-header label[for="__drawer"]').click()
         expect(phone.locator('#__drawer')).to_be_checked()
-        phone.locator('.md-nav--primary a[href$="notes/03-segmentation/"]').click()
+        phone.locator('.md-nav--primary a[href$="lectures/03-segmentation/"]').click()
         expect(phone.locator('h1')).to_contain_text('Segmentation')
         phone.screenshot(path=str(OUT / 'segmentation-mobile.png'), full_page=False)
-        phone.goto(BASE + 'notes/05-multimodal-dermoscopy/')
+        phone.goto(BASE + 'lectures/05-multimodal-dermoscopy/')
         phone.screenshot(path=str(OUT / 'lecture05-mobile.png'), full_page=False)
+        phone.goto(BASE + 'lectures/06-ultrasound-pathology/')
+        phone.screenshot(path=str(OUT / 'lecture06-mobile.png'), full_page=False)
 
         nojs = browser.new_context(java_script_enabled=False)
         static = nojs.new_page()
@@ -118,6 +145,8 @@ def run():
         expect(static.locator('.slide-figure')).to_have_count(20)
         static.goto(BASE + 'slides/generated/05-081-100/')
         expect(static.locator('.slide-figure')).to_have_count(20)
+        static.goto(BASE + 'slides/generated/06-101-110/')
+        expect(static.locator('.slide-figure')).to_have_count(10)
         browser.close()
     assert not errors, errors
     print(json.dumps({'status':'PASS','chinese_search_results':chinese_results,'screenshots':str(OUT),'checks':['chapter content','local math','image enlargement','Chinese/English search','slide deep links','history','keyboard navigation','theme toggle','mobile navigation','responsive layout','no-JS gallery']},ensure_ascii=False,indent=2))

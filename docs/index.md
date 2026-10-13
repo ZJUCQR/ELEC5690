@@ -21,12 +21,13 @@ title: Advanced Topics in Artificial Intelligence for Medical Image Analysis
 ## 主题导航 {#topics}
 
 <div class="chapter-list">
-<a class="chapter-row" href="notes/01a-introduction/"><span class="chapter-number">01a</span><span><strong>Medical Imaging & AI · 医学影像入门</strong><small>成像方式、AI / ML / DL、视觉任务与卷积网络</small></span><span class="chapter-end">阅读 ↗</span></a>
-<a class="chapter-row" href="notes/01b-fundamentals/"><span class="chapter-number">01b</span><span><strong>Deep Learning Fundamentals · 深度学习基础</strong><small>回归、损失函数、反向传播、优化与泛化</small></span><span class="chapter-end">阅读 ↗</span></a>
-<a class="chapter-row" href="notes/02-classification/"><span class="chapter-number">02</span><span><strong>Classification · 图像分类</strong><small>经典网络、迁移学习、评价指标与疾病筛查</small></span><span class="chapter-end">阅读 ↗</span></a>
-<a class="chapter-row" href="notes/03-segmentation/"><span class="chapter-number">03</span><span><strong>Segmentation · 分割、三维与视频</strong><small>U-Net、Dice、三维卷积与视频建模</small></span><span class="chapter-end">阅读 ↗</span></a>
-<a class="chapter-row" href="notes/04-training-retina/"><span class="chapter-number">04</span><span><strong>Training & Retinal Images · 训练策略与视网膜影像</strong><small>预处理、增强、眼底与 OCT、视网膜研究</small></span><span class="chapter-end">阅读 ↗</span></a>
-<a class="chapter-row" href="notes/05-multimodal-dermoscopy/"><span class="chapter-number">05</span><span><strong>Multi-modal Data & Dermoscopy · 多模态、皮肤镜与超声</strong><small>融合、皮损分析、旋转等变与超声成像</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="lectures/01a-introduction/"><span class="chapter-number">01a</span><span><strong>Medical Imaging & AI · 医学影像入门</strong><small>成像方式、AI / ML / DL、视觉任务与卷积网络</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="lectures/01b-fundamentals/"><span class="chapter-number">01b</span><span><strong>Deep Learning Fundamentals · 深度学习基础</strong><small>回归、损失函数、反向传播、优化与泛化</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="lectures/02-classification/"><span class="chapter-number">02</span><span><strong>Classification · 图像分类</strong><small>经典网络、迁移学习、评价指标与疾病筛查</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="lectures/03-segmentation/"><span class="chapter-number">03</span><span><strong>Segmentation · 分割、三维与视频</strong><small>U-Net、Dice、三维卷积与视频建模</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="lectures/04-training-retina/"><span class="chapter-number">04</span><span><strong>Training & Retinal Images · 训练策略与视网膜影像</strong><small>预处理、增强、眼底与 OCT、视网膜研究</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="lectures/05-multimodal-dermoscopy/"><span class="chapter-number">05</span><span><strong>Multi-modal Data & Dermoscopy · 多模态、皮肤镜与超声</strong><small>融合、皮损分析、旋转等变与超声成像</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="lectures/06-ultrasound-pathology/"><span class="chapter-number">06</span><span><strong>Ultrasound & Pathology · 超声与计算病理</strong><small>心脏超声、全切片学习、EchoPrime、TITAN 与模型后训练</small></span><span class="chapter-end">阅读 ↗</span></a>
 </div>
 
 ## 术语与指标速查 {#quick-reference}
@@ -35,17 +36,19 @@ title: Advanced Topics in Artificial Intelligence for Medical Image Analysis
 
     | 英文 | 中文 | 要点 | 章节 |
     | --- | --- | --- | --- |
-    | Classification | 分类 | 输出类别或类别分数 | [2](notes/02-classification.md) |
-    | Regression | 回归 | 输出连续数值 | [1b](notes/01b-fundamentals.md) |
-    | Semantic segmentation | 语义分割 | 每个像素 / 体素一个类别 | [3](notes/03-segmentation.md) |
-    | Instance segmentation | 实例分割 | 类别之外，还区分目标个体 | [3](notes/03-segmentation.md) |
-    | Ground truth | 参考真值 / 标注 | 指评价协议中的参考标签，不意味着绝对无误 | [2](notes/02-classification.md) |
-    | Voxel | 体素 | 三维数据的基本单元 | [3](notes/03-segmentation.md) |
-    | Spacing | 像素 / 体素间距 | 数组坐标与物理尺度的联系 | [4](notes/04-training-retina.md) |
-    | ROI | 感兴趣区域 | Region of interest | [3](notes/03-segmentation.md) |
-    | Data leakage | 数据泄漏 | 评价数据的信息进入训练或选参 | [2](notes/02-classification.md) |
-    | Multimodal learning | 多模态学习 | 联合不同输入来源，例如 MRI 序列或图像与报告 | [5](notes/05-multimodal-dermoscopy.md) |
-    | Multi-task learning | 多任务学习 | 联合多个输出目标，例如分类、检测与分割 | [5](notes/05-multimodal-dermoscopy.md) |
+    | Classification | 分类 | 输出类别或类别分数 | [2](lectures/02-classification.md) |
+    | Regression | 回归 | 输出连续数值 | [1b](lectures/01b-fundamentals.md) |
+    | Semantic segmentation | 语义分割 | 每个像素 / 体素一个类别 | [3](lectures/03-segmentation.md) |
+    | Instance segmentation | 实例分割 | 类别之外，还区分目标个体 | [3](lectures/03-segmentation.md) |
+    | Ground truth | 参考真值 / 标注 | 指评价协议中的参考标签，不意味着绝对无误 | [2](lectures/02-classification.md) |
+    | Voxel | 体素 | 三维数据的基本单元 | [3](lectures/03-segmentation.md) |
+    | Spacing | 像素 / 体素间距 | 数组坐标与物理尺度的联系 | [4](lectures/04-training-retina.md) |
+    | ROI | 感兴趣区域 | Region of interest | [3](lectures/03-segmentation.md) |
+    | Data leakage | 数据泄漏 | 评价数据的信息进入训练或选参 | [2](lectures/02-classification.md) |
+    | Multimodal learning | 多模态学习 | 联合不同输入来源，例如 MRI 序列或图像与报告 | [5](lectures/05-multimodal-dermoscopy.md) |
+    | Multi-task learning | 多任务学习 | 联合多个输出目标，例如分类、检测与分割 | [5](lectures/05-multimodal-dermoscopy.md) |
+    | Whole-slide image / WSI | 全切片图像 | 在多个尺度观察组织，通常切成 patch 后聚合 | [6](lectures/06-ultrasound-pathology.md#whole-slide-images) |
+    | Multiple instance learning / MIL | 多实例学习 | 以实例袋标签监督学习，实例自身未必有标签 | [6](lectures/06-ultrasound-pathology.md#attention-mil) |
 
 ??? note "训练与网络"
 

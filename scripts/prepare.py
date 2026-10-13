@@ -45,7 +45,7 @@ def prepare():
         count = deck['pages']
         options = ''.join(f'<option value="{p}">p. {p} · {html.escape(topic(deck, p))}</option>' for p in range(1, count + 1))
         lines = [f'# Lecture {deck["id"]} · {deck["zh"]}', '',
-            f'{deck["title"]} · **{count} 页** · [阅读中文笔记](../../notes/{deck["note"]}.md) · [下载完整 PDF](../../originals/lecture-{deck["id"]}.pdf)', '',
+            f'{deck["title"]} · [章节与案例](../../lectures/{deck["note"]}.md) · [PDF](../../originals/lecture-{deck["id"]}.pdf)', '',
             '使用下方页码选择原页。左右方向键可以翻页，点击图像可放大；每一页都有可分享的链接。', '',
             f'<div class="slide-viewer" data-deck="{deck["id"]}" data-count="{count}">',
             '<div class="viewer-toolbar"><button type="button" data-prev aria-label="上一页">← 上一页</button>',
@@ -62,7 +62,7 @@ def prepare():
             name = f'{deck["id"]}-{start:03}-{end:03}.md'
             lines.append(f'- [第 {start}–{end} 页]({name})')
             gallery = ['---', 'search:', '  exclude: true', '---', '', f'# Lecture {deck["id"]} · 第 {start}–{end} 页', '',
-                       f'[← 返回课件浏览器]({deck["id"]}.md) · [中文笔记](../../notes/{deck["note"]}.md)', '']
+                       f'[← 返回原页浏览]({deck["id"]}.md) · [章节与案例](../../lectures/{deck["note"]}.md)', '']
             for p in range(start, end + 1):
                 gallery += [f'## 第 {p} 页 · {topic(deck, p)}', '', f'[[slide:{deck["id"]}:{p}|{topic(deck, p)}]]', '']
             if end < count:

@@ -1,5 +1,5 @@
 site_name: Advanced Topics in Artificial Intelligence for Medical Image Analysis
-site_description: 从深度学习基础到医学影像分类、分割、多模态、视网膜、皮肤镜与超声，结合公式、图示和研究案例理解方法。
+site_description: 从深度学习基础到医学影像分类、分割、多模态、超声与计算病理，结合公式、图示和研究案例理解方法。
 site_url: https://zjucqr.github.io/ELEC5690/
 repo_url: https://github.com/ZJUCQR/ELEC5690
 repo_name: ZJUCQR / ELEC5690
@@ -71,12 +71,13 @@ extra_javascript:
 nav:
   - 学习笔记:
     - 首页: index.md
-    - 1a · Medical Imaging & AI: notes/01a-introduction.md
-    - 1b · Deep Learning Fundamentals: notes/01b-fundamentals.md
-    - 2 · Classification: notes/02-classification.md
-    - 3 · Segmentation: notes/03-segmentation.md
-    - 4 · Training & Retinal Images: notes/04-training-retina.md
-    - 5 · Multi-modal Data & Dermoscopy: notes/05-multimodal-dermoscopy.md
+    - 1a · Medical Imaging & AI: lectures/01a-introduction.md
+    - 1b · Deep Learning Fundamentals: lectures/01b-fundamentals.md
+    - 2 · Classification: lectures/02-classification.md
+    - 3 · Segmentation: lectures/03-segmentation.md
+    - 4 · Training & Retinal Images: lectures/04-training-retina.md
+    - 5 · Multi-modal Data & Dermoscopy: lectures/05-multimodal-dermoscopy.md
+    - 6 · Ultrasound & Pathology: lectures/06-ultrasound-pathology.md
   - 原 PPT: slides/index.md
 validation:
   nav:
