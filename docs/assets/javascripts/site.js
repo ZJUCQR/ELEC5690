@@ -1,6 +1,14 @@
 /* Local-only mathematics, accessible image enlargement, and slide navigation. */
 (() => {
   'use strict';
+  // Ultrasound fundamentals now belong to Lecture 06; keep existing bookmarks.
+  if (location.pathname.endsWith('/lectures/05-multimodal-dermoscopy/') && location.hash === '#58-ultrasound') {
+    const target = new URL('../06-ultrasound-pathology/', location.href);
+    target.search = location.search;
+    target.hash = '61-ultrasound-physics';
+    location.replace(target.href);
+    return;
+  }
   // Material listens for keyup. Also refresh for paste, mobile keyboards, and IME.
   const searchInput = document.querySelector('input[data-md-component="search-query"]');
   if (searchInput) {

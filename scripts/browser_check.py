@@ -81,12 +81,18 @@ def run():
         page.screenshot(path=str(OUT / 'slide-viewer.png'), full_page=False)
 
         page.goto(BASE + 'lectures/05-multimodal-dermoscopy/')
-        expect(page.locator('.slide-figure')).to_have_count(26)
+        expect(page.locator('[id="58-ultrasound"]')).to_have_count(0)
+        expect(page.locator('[id="52-fusion"]')).to_be_visible()
+        for slide in [34, 35, 36, 37, 38, 39, 40]:
+            expect(page.locator(f'.slide-figure img[src$="/05/{slide:03}.webp"]')).to_have_count(1)
+        for tab, quote in [('Early fusion', 'before any model processing'), ('Joint fusion', 'combined-modality components'), ('Late fusion', 'Individual modality outputs')]:
+            page.locator('.tabbed-labels label').filter(has_text=tab).click()
+            expect(page.locator('blockquote').filter(has_text=quote)).to_be_visible()
         expect(page.locator('.katex').first).to_be_attached()
         assert page.locator('.arithmatex').evaluate_all('els => els.every(el => el.querySelector(".katex"))')
         assert page.locator('.katex-error').count() == 0
         page.screenshot(path=str(OUT / 'lecture05-desktop.png'), full_page=False)
-        page.locator('.slide-figure figcaption a').first.click()
+        page.locator('.slide-figure figcaption a[href$="/05/#page=12"]').click()
         expect(page.locator('[data-page]')).to_have_value('12')
         expect(page.locator('[data-viewer-image] img')).to_have_attribute('src', BASE + 'assets/slides/05/012.webp')
         page.locator('[data-page]').select_option('100')
@@ -101,15 +107,18 @@ def run():
         assert page.locator('.katex-error').count() == 0
         for heading in ['EchoPrime', 'Attention MIL', 'MSSG', 'TITAN', 'QoQ-Med']:
             expect(page.locator('h2', has_text=heading)).to_have_count(1)
+        for slide in [89, 94, 97, 98]:
+            expect(page.locator(f'.slide-figure img[src$="/05/{slide:03}.webp"]')).to_have_count(1)
+        expect(page.locator('h3', has_text='26 μs')).to_have_count(1)
         page.screenshot(path=str(OUT / 'lecture06-desktop.png'), full_page=False)
-        page.locator('.slide-figure figcaption a').first.click()
+        page.locator('.slide-figure figcaption a[href$="/06/#page=5"]').click()
         expect(page.locator('[data-page]')).to_have_value('5')
         expect(page.locator('[data-viewer-image] img')).to_have_attribute('src', BASE + 'assets/slides/06/005.webp')
         page.locator('[data-page]').select_option('110')
         expect(page.locator('[data-next]')).to_be_disabled()
         expect(page.locator('[data-pdf-page]')).to_have_attribute('href', BASE + 'originals/lecture-06.pdf#page=110')
         page.goto(BASE + 'notes/05-multimodal-dermoscopy/#58-ultrasound')
-        expect(page).to_have_url(BASE + 'lectures/05-multimodal-dermoscopy/#58-ultrasound')
+        expect(page).to_have_url(BASE + 'lectures/06-ultrasound-pathology/#61-ultrasound-physics')
         page.goto(BASE + 'slides/')
         expect(page.locator('.md-content a[href="generated/06/"]')).to_be_visible()
         expect(page.locator('.md-content a[href="../originals/lecture-06.pdf"]')).to_have_count(1)

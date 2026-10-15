@@ -26,8 +26,8 @@ title: Advanced Topics in Artificial Intelligence for Medical Image Analysis
 <a class="chapter-row" href="lectures/02-classification/"><span class="chapter-number">02</span><span><strong>Classification · 图像分类</strong><small>经典网络、迁移学习、评价指标与疾病筛查</small></span><span class="chapter-end">阅读 ↗</span></a>
 <a class="chapter-row" href="lectures/03-segmentation/"><span class="chapter-number">03</span><span><strong>Segmentation · 分割、三维与视频</strong><small>U-Net、Dice、三维卷积与视频建模</small></span><span class="chapter-end">阅读 ↗</span></a>
 <a class="chapter-row" href="lectures/04-training-retina/"><span class="chapter-number">04</span><span><strong>Training & Retinal Images · 训练策略与视网膜影像</strong><small>预处理、增强、眼底与 OCT、视网膜研究</small></span><span class="chapter-end">阅读 ↗</span></a>
-<a class="chapter-row" href="lectures/05-multimodal-dermoscopy/"><span class="chapter-number">05</span><span><strong>Multi-modal Data & Dermoscopy · 多模态、皮肤镜与超声</strong><small>融合、皮损分析、旋转等变与超声成像</small></span><span class="chapter-end">阅读 ↗</span></a>
-<a class="chapter-row" href="lectures/06-ultrasound-pathology/"><span class="chapter-number">06</span><span><strong>Ultrasound & Pathology · 超声与计算病理</strong><small>心脏超声、全切片学习、EchoPrime、TITAN 与模型后训练</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="lectures/05-multimodal-dermoscopy/"><span class="chapter-number">05</span><span><strong>Multi-modal Data & Dermoscopy · 多模态与皮肤镜</strong><small>融合类型与模型判图、皮损分析、旋转等变</small></span><span class="chapter-end">阅读 ↗</span></a>
+<a class="chapter-row" href="lectures/06-ultrasound-pathology/"><span class="chapter-number">06</span><span><strong>Ultrasound & Pathology · 超声与计算病理</strong><small>超声成像与探头、心脏超声、全切片学习与医学基础模型</small></span><span class="chapter-end">阅读 ↗</span></a>
 </div>
 
 ## 术语与指标速查 {#quick-reference}
@@ -69,7 +69,7 @@ title: Advanced Topics in Artificial Intelligence for Medical Image Analysis
     | Transposed convolution | 转置卷积 | 可学习的尺寸扩张操作，不是数学逆卷积 |
     | Self-supervised learning | 自监督学习 | 从数据本身构造训练目标 |
     | MAE | 掩码自编码器 | Masked autoencoder，通过重建遮挡部分学习 |
-    | Early / Joint / Late fusion | 早期 / 联合 / 后期融合 | 分别在输入、可联合训练的特征、预测结果处合并 |
+    | [Early / Joint / Late fusion](lectures/05-multimodal-dermoscopy.md#52-fusion) | 早期 / 联合 / 后期融合 | 分别合并原始 / 固定输入特征、可联合训练的中间特征、预测结果 |
     | FPN / RPN | 特征金字塔 / 区域建议网络 | 分别组织多尺度特征、产生候选区域 |
     | Focal loss | 焦点损失 | 用难易调制因子降低容易样本的相对贡献 |
     | Equivariance | 等变性 | 输入变换后，输出按对应方式变换 |

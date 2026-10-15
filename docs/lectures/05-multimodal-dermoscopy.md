@@ -1,6 +1,6 @@
 # 5: Multi-modal Data & Dermoscopy
 
-理解多模态融合，比较皮肤镜分析中的分割、分类与多任务方法，再认识超声成像的物理基础。
+理解多模态融合，沿模型图判断融合位置，再比较皮肤镜分析中的分割、分类与多任务方法。
 
 眼底与 OCT 的成像基础见[第 4 章](04-training-retina.md)。
 
@@ -18,6 +18,10 @@
 | 不同临床记录 | p. 13 的检验、用药、诊断和病程记录 | 时间顺序、量纲、缺失项与预测时点 |
 
 补充理解：多模态描述的是**输入来源**，多任务描述的是**输出目标**。四种 MRI 序列预测一个分割结果，是多模态单任务；一张皮肤镜图同时预测类别、框和 mask，是单模态多任务。
+
+[[slide:05:13|临床多模态数据原例：检验、用药、诊断与病程记录]]
+
+不同类型的临床记录也属于多模态来源。这张图展示的是数据，并未给出融合模型；只看输入种类，无法判断 early、joint 或 late fusion。
 
 ### MRI 原例：四个通道不是四个独立病例
 
@@ -40,49 +44,132 @@ TR（repetition time）与 TE（echo time）是采集时序参数。补充澄清
 
 补充实现对应：一批二维四序列输入可以表示为 `[B, 4, H, W]`，三维输入可以表示为 `[B, 4, D, H, W]`。堆叠前应完成空间对齐，并保持序列顺序一致；缺失序列需要单独约定处理方式。
 
-## 5.2 Fusion（融合发生在哪里？）
+## 5.2 Fusion（看模型图判断融合类型） {#52-fusion}
 
-### Early、Joint 与 Late Fusion
+判断的关键是**合并什么、在哪里合并、融合后的 loss 是否更新模态分支**。输入有几种模态、网络有几条分支、是否出现 `concatenation`，都不能单独决定类型。
 
-[[slide:05:34|输入融合、联合特征融合与预测融合]]
+### 分类原图：五种结构，三类融合
 
-| 方式 | 合并的对象 | 训练时的关键区别 | 本章例子 |
-| --- | --- | --- | --- |
-| Early fusion | 原始输入，或预先提取的固定特征 | 合并后送入预测模型 | 四种 MRI 序列按通道堆叠 |
-| Joint fusion | 各模态编码器产生的中间特征 | 联合目标可更新模态分支与融合部分 | 乳腺视图特征、图像与文本联合网络 |
-| Late fusion | 各分支的预测结果 | 在输出端平均、加权或聚合 | CC、MLO 的预测平均 |
+[[slide:05:34|Early Type I / II、Joint Type I / II 与 Late Fusion：沿箭头寻找融合点]]
 
-这里采用的分类约定是：如果特征提取器固定，只把提取好的特征拼在一起训练后续分类器，也可归入这里的 early fusion。因而不能仅凭图上出现 `concatenation` 就判定类别，还要看**拼接的位置和梯度是否回到特征提取器**。
+先读右上角图例：**圆形是 feature，带斜线的圆形是 extracted feature，方形是 prediction**；蓝色、绿色表示不同模态，橙色表示最终输出。中间图向下返回的 `Loss` 箭头表示模态特征提取器也接受训练信号。
 
-补充数学表达，设 $x_m$ 为第 $m$ 个模态，$f_m$ 为其编码器：
+| 图中结构 | 数据流与识别线索 | 判定依据 |
+| --- | --- | --- |
+| **Early Fusion — Type I** | 原始特征先拼接 → 一个模型 → 输出 | 模型处理前已经合并输入 |
+| **Early Fusion — Type II** | 原始 / 预提取特征先拼接 → 一个模型 → 输出 | 预提取特征可以作为输入；下游梯度不更新其提取器 |
+| **Joint Fusion — Type I** | 两个模态分别经过可学习网络 → 中间特征合并 → 联合预测 | 联合训练更新模态专属网络与融合后的模型 |
+| **Joint Fusion — Type II** | 一个模态先经过可学习网络，再与另一模态的原始 / 已有特征合并 | 不要求每种模态都有一个可训练编码器；图中的模态网络仍由联合 loss 更新 |
+| **Late Fusion** | 各模态模型分别输出预测 → aggregation → 最终预测 | 合并的是预测结果，而非中间表示 |
+
+### 英文定义摘录与看图要点
+
+以下英文摘录自 p. 35–37，合并了原页换行；中文用于解释判定方法。
+
+=== "Early fusion"
+
+    [[slide:05:35|Early fusion 原页：输入拼接，以及不回传梯度的预提取特征]]
+
+    > Early fusion: concatenate / combine data before any model processing. Includes using extracted features as input, if model gradients are not backpropagated to update feature extractor parameters
+
+    **先合并输入，再交给模型。** 即使输入来自预训练 CNN，只要作为固定特征使用、下游梯度不更新提取器，仍可按本章约定归入 early fusion。不要把“经过 CNN 的特征”直接等同于 joint fusion。
+
+=== "Joint fusion"
+
+    [[slide:05:36|Joint fusion 原页：模态专属组件与融合组件共同更新]]
+
+    > Joint fusion: Both modality-specific components (with learnable parameters) and combined-modality components within the model, that are updated during model training
+
+    **先做模态专属处理，在中间表示处融合，再共同训练。** 看融合后的 loss 是否能更新模态分支。Type II 表明：一个分支是可训练网络、另一个是已有特征，也可以构成 joint fusion。
+
+=== "Late fusion"
+
+    [[slide:05:37|Late fusion 原页：先各自预测，再聚合预测结果]]
+
+    > Late fusion: Main learnable model components are only model specific. Individual modality outputs are then aggregated.
+
+    **各自预测，再合并答案。** 原文的 `model specific` 沿用原页措辞，这里对应各模态自己的模型。平均、加权、投票可以实现预测聚合；应先确认被聚合的是预测，而不是 feature map。
+
+### 考试看图：先找融合点，再解释训练关系
+
+1. **从输入沿箭头走**，找不同模态第一次相遇的位置；有多个融合点时分别判断。
+2. **相遇时已经各自预测了吗？** 若已经有类别概率、分数或预测值，再平均 / 投票，属于 late fusion。
+3. **若合并的是输入或特征，看训练关系。** 原始 / 固定特征在模型前合并 → early；模态网络产生中间表示，并接受联合 loss 更新 → joint。
+4. **用图中的模块说明理由。** 回答包含“类型＋融合的对象＋融合位置”，不要只写类型名称。若图中没有冻结 / 梯度信息，就注明判断所需的训练条件。
+
+| 可以直接用于简答的句式 | 需要在图中指出什么 |
+| --- | --- |
+| **Early fusion:** The modalities are concatenated at the input level before model processing. | 输入通道 / 特征向量先拼接 |
+| **Early fusion with fixed features:** The extracted features are combined as inputs, and the feature extractors are not updated by the downstream loss. | 固定提取器、无回传更新 |
+| **Joint fusion:** Modality-specific features are fused inside the network, and the modality-specific and fusion components are trained jointly. | 中间特征、联合训练路径 |
+| **Late fusion:** Each modality produces its own prediction, and these predictions are aggregated to obtain the final output. | 各自预测头、末端聚合 |
+
+补充数学表达，设 $x_m$ 为模态输入、$f_m$ 为其编码器：
 
 $$
 \begin{aligned}
 \text{Early:}\quad &\hat y=h([x_1;x_2]),\\
 \text{Joint:}\quad &\hat y=h([f_1(x_1);f_2(x_2)]),\\
-\text{Late:}\quad &p(y)=\sum_m\alpha_m p_m(y),\qquad \sum_m\alpha_m=1,\quad\alpha_m\geq0.
+\text{Late:}\quad &p(y)=\sum_m\alpha_m p_m(y),\qquad \alpha_m\geq0,\quad\sum_m\alpha_m=1.
 \end{aligned}
 $$
 
-这里的方括号表示拼接；最后一式是对齐类别后的概率加权示意。使用哪种融合，应由数据对应关系、任务和验证结果决定。
+方括号表示拼接。第二式只有在模态分支按联合目标更新时才体现这里的 joint fusion；若 $f_m$ 固定，其输出只是预提取输入特征，就要按 early fusion 的约定判断。
 
-### 乳腺多视图：一个模型可以包含两种融合
+### 原题 1：MRI 脑肿瘤分割 — Early fusion
 
-[[slide:05:23|Wu 等人的原例：视图内特征融合与 CC / MLO 预测平均]]
+[[slide:05:38|原题：What kind of fusion was this model? 四种 MRI 序列的脑肿瘤分割]]
 
-按数据流追踪这个网络：
+**答案：Early fusion（输入级融合）。** T1、T1C、T2、FLAIR 在进入卷积网络前已堆叠成通道。图中输入是 $4\times33\times33$：4 是模态数，33 是 patch 边长；输出 $5\times1\times1$ 是目标位置的五类预测。
 
-1. **四个输入**：L-CC、R-CC、L-MLO、R-MLO。L/R 表示左右乳腺；CC 是头尾位，MLO 是内外斜位。
-2. **分别编码**：每个视图经过 ResNet-22 和平均池化。同一投照方向的左右分支共享参数，CC 与 MLO 使用分别学习的参数。
-3. **中间融合**：同一方向的左右特征拼接，经过全连接层，预测左/右乳腺的良性、恶性相关标签。
-4. **输出融合**：将 CC 与 MLO 对同一标签的预测平均，得到最终输出。
+图内上下两条路径从**同一个四通道输入**提取不同尺度的上下文，后面再拼接它们。它们不是四个 MRI 模态分别训练的分支，因此内部的双路径 / `Concatenation` 不改变输入级 early fusion 的判断。
 
-图中四个标签分别是左侧恶性、左侧良性、右侧恶性、右侧良性，均是二元判断。它们不是把所有病例划成四个互斥类别，因此不能用一个四类 softmax 来替代原图的全部预测头。
+!!! example "英文作答"
+    **This is early fusion. The four MRI modalities are stacked as input channels before convolutional processing. The two internal paths extract features from the already fused input.**
 
-!!! question "这些模型属于哪种融合？"
-    - MRI 通道堆叠：early fusion；内部存在多条计算路径不改变这个判断。
-    - 乳腺多视图：中间特征的 joint fusion，加上预测端的 late fusion。
-    - 胸片与报告的 TieNet：图像、文本分支在训练中联合学习，属于 joint fusion。
+### 原题 2：乳腺四视图 — Joint + Late fusion
+
+[[slide:05:39|原题：What kind of fusion was this model? 左右乳腺 CC / MLO 四视图]]
+
+**答案：同时包含 Joint fusion 和 Late fusion。** 需要指出两个不同的融合位置；只写其中一种不足以描述整张图。
+
+| 从下到上的位置 | 原图在做什么 | 应怎样解释 |
+| --- | --- | --- |
+| 四个输入 | L-CC、R-CC、L-MLO、R-MLO | L/R 为左/右；CC 为头尾位；MLO 为内外斜位 |
+| ResNet-22 | 各视图分别提特征 | 同一投照方向的左右分支共享参数；CC 与 MLO 的参数分别学习 |
+| Average pooling | 每条分支压缩空间特征 | 这里尚未合并不同模态的预测，不能因 `average` 就叫 late fusion |
+| Concatenation → fully connected layer | 同一投照方向的左右特征拼接，再预测 | **Joint fusion**：中间特征融合，分支与融合部分共同训练 |
+| 各方向的预测头 | 左/右乳腺的良性、恶性标签，各为二元判断 | 四个独立标签，不是四类互斥的一个 softmax |
+| 顶部 average | CC 与 MLO 对同一标签的预测平均 | **Late fusion**：合并已经产生的预测 |
+
+=== "中间特征融合：p. 20"
+
+    [[slide:05:20|标注原图：拼接 modality-specific processing 的输出，再进行联合预测]]
+
+    先有模态专属表示，再把左右特征拼起来。`Fully connected layer` 位于特征合并之后，不代表这里是在融合两个最终预测。
+
+=== "预测融合：p. 23"
+
+    [[slide:05:23|标注原图：CC 与 MLO 的预测平均，是第二处融合]]
+
+    先分别得到 CC、MLO 的二元预测，再逐标签平均。参数共享是编码器的设计，不能替代对融合位置的判断。
+
+!!! example "英文作答"
+    **The model uses both joint and late fusion. Left and right features are concatenated within each projection branch and jointly processed. The CC and MLO predictions are then averaged, which is late fusion.**
+
+### 原题 3：TieNet 胸片＋报告 — Joint fusion
+
+[[slide:05:40|原题：What kind of fusion was this model? 胸片 CNN 与报告 LSTM]]
+
+**答案：Joint fusion。** CNN 提取胸片特征，word embedding / LSTM 处理报告；图像特征通过注意力参与文本序列处理，再将学习到的图文表示融合进行疾病预测。交互发生在中间表示层，模态专属组件和融合组件共同训练。
+
+不要因为融合处有一个最终 fully connected layer 就答 late fusion：图中没有“胸片独立诊断＋报告独立诊断，再平均两个答案”的过程。具体注意力数据流见下一节。
+
+!!! example "英文作答"
+    **This is joint fusion. Image and text representations interact within the network through attention and are fused for disease prediction; the modality-specific and fusion components are trained jointly.**
+
+!!! warning "看图判断的易错点"
+    `Concatenation` 不必然是 joint；`average pooling` 不必然是 late；两个分支不必然是两个模态。先看分支处理什么，再看合并的是输入、可共同训练的特征，还是预测。`Joint embedding space` 的名字也不能代替融合结构与训练关系的证据。
 
 ## 5.3 Image–Text Learning（胸片与报告）
 
@@ -96,7 +183,9 @@ Wang 等人的 TieNet（CVPR 2018）将胸片和对应报告用于联合学习�
 - **文本路径**：词先变为 embedding，再由 LSTM 处理序列，形成文本表示。
 - **交互与输出**：每个时间步结合图像信息；词语显著性用于加权空间注意力图，再由联合表示预测疾病标签。
 
-两种表示在中间计算中已经发生交互，再由联合全连接部分产生预测。
+[[slide:05:29|TieNet 最终融合位置：图文表示进入 fully connected layer，再输出疾病标签]]
+
+两种表示在中间计算中已经发生交互，再由联合全连接部分产生预测。p. 25–27 分别标出 word embedding、CNN 与 LSTM；p. 28 的词语 saliency 用于加权空间 attention maps，p. 29 才是最终图文表示的融合。因此，整个方法属于 joint fusion。
 
 补充阅读建议：区分报告用于训练监督、联合输入或生成目标的设置，并单独核对推理时实际可用的输入。特别是当报告本身写有目标疾病时，不能把“读到报告后分类”的结果直接解释为“只看胸片”的能力。
 
@@ -105,6 +194,12 @@ Wang 等人的 TieNet（CVPR 2018）将胸片和对应报告用于联合学习�
 [[slide:05:32|Hsu 等人的原例：图像和文本映射到共同的 embedding 空间]]
 
 这一例的目标是学习跨模态表示：图像和对应报告在空间中接近，其他不相关报告相对更远。图像由 DenseNet121 提取特征，文本使用自己的特征表示，再映射到共同空间。它可以用于 image-to-text 或 text-to-image retrieval，而不只是输出固定类别。
+
+[[slide:05:33|Hsu 等人的完整原例：图像 / 文本处理、共同嵌入空间与三种对齐目标]]
+
+> Learn mapping from images and text to vectors in the same embedding space, such that images are embedded closer to their corresponding reports than other reports, and vice versa.
+
+**读图区别：** 胸片经 DenseNet121、平均池化和 PCA；报告经 TF-IDF / distributed embeddings，再用映射 $W$ 对齐。共同空间中保留图像、文本各自的向量，用于跨模态匹配，并不是两个疾病预测的平均。图中的 `Joint Embedding Space` 表示共同嵌入空间；它本身不能证明所有编码器接受同一个 loss 的端到端更新，不能仅凭名称将其等同于前面定义的 joint fusion 分类网络。
 
 该方法比较三种训练设置：
 
@@ -291,70 +386,6 @@ $$
 [[slide:05:82|旋转等变与深监督的消融表：比较结构变化及参数量]]
 
 原页中，ResnetFCN34* 与 (RE)-ResnetFCN34* 均列为 22.8M 参数，JA 从 71.27 增至 74.54。这组结果是在参数量相同的对照下观察到的改进。表中的数值采用百分数尺度，而 p. 83 的比较表采用 0–1 尺度，阅读时先统一单位。
-
-## 5.8 Ultrasound（超声图像怎样形成？）
-
-### 从回波到亮度
-
-超声探头发出声脉冲，接收组织界面返回的回波。回波到达时间用于估计深度，信号幅度经过处理后形成亮度，因此图像同时依赖组织性质和设备设置。
-
-[[slide:05:89|两种介质的声阻抗差异影响反射与透射]]
-
-在简化的界面模型中，阻抗相同时不产生反射；差异很大时，反射更强，能够继续向深部传播的能量可能减少。
-
-补充物理表达：声阻抗 $Z=\rho c$。在理想、垂直入射的两介质界面上，强度反射系数为
-
-$$
-R=\left(\frac{Z_2-Z_1}{Z_2+Z_1}\right)^2.
-$$
-
-该式描述理想界面的简化情形；实际图像还受到传播损耗、散射、入射方向与增益的影响。
-
-### 例：26 μs 为什么对应约 2 cm？
-
-[[slide:05:94|超声测深原例：2 cm 结构的往返时间约为 26 μs]]
-
-回波时间 $t$ 包含从探头到目标、再从目标返回探头的两段路程，因此
-
-$$
-d=\frac{ct}{2}.
-$$
-
-!!! example "例：从往返时间计算深度"
-    补充采用软组织常用近似声速 $c=1540\,\mathrm{m/s}$，代入原页 $t=26\,\mu\mathrm{s}$：
-
-    $$
-    d=\frac{1540\times26\times10^{-6}}{2}\,\mathrm{m}
-    =0.02002\,\mathrm{m}\approx2\,\mathrm{cm}.
-    $$
-
-    同理，每增加约 $13\,\mu\mathrm{s}$ 的往返时间，对应约 1 cm 的深度。漏掉分母 2，会把深度算成约 4 cm。
-
-### 探头、频率与图像调节
-
-[[slide:05:97|相控阵、凸阵与线阵的频率及应用示例]]
-
-| 探头 | 频率示例 | 特点与用途 |
-| --- | --- | --- |
-| Phased array，相控阵 | 1–5 MHz；儿科探头例为 4–8 MHz | 接触面小、穿透较好；心脏、肺部 |
-| Curvilinear，凸阵 | 2–5 MHz | 接触面较大、穿透较好；腹部、FAST 等 |
-| Linear array，线阵 | 2–13 MHz | 近场表现较好；血管及操作引导 |
-
-这些频率范围是示例，不是所有设备的固定规格。选择探头需要同时考虑目标深度、接触位置和视野。
-
-[[slide:05:98|频率与衰减原例：3 MHz 与 10 MHz 的穿透差异]]
-
-频率较高时波长较短，在相应的脉冲与系统条件下有利于分辨浅表细节，但传播衰减通常更强；频率较低则有利于观察较深结构。可用以下近似关系理解：
-
-$$
-A\,(\mathrm{dB})\approx0.5\,f\,(\mathrm{MHz})\,L\,(\mathrm{cm}).
-$$
-
-这里的 $L$ 是**传播路径长度**。补充说明：估算回波的往返衰减时，路径长度约为目标深度的两倍；0.5 是用于说明软组织衰减的近似系数，并非所有组织都相同。
-
-常用调节包括 depth、width、overall gain、time gain compensation 和 focus。整体增益改变整体亮度，TGC 对不同到达时间、也就是不同深度的回波作不同补偿。把增益调高不等于恢复了已经丢失的结构信息。
-
-延伸阅读：[超声原理视频](https://gohkust-my.sharepoint.com/personal/eexmli_ust_hk/Documents/Work/courses/HKUST/XiaomengLi/ELEC4010N/the-principles-of-ultrasound-imaging.mp4)（学校 SharePoint 链接）。
 
 ---
 
